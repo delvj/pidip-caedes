@@ -1,0 +1,4 @@
+pidip.pd_linux usr/lib/pd/extra/pidip/
+doc/* usr/lib/pd/extra/pidip/
+fonts/* usr/lib/pd/extra/pidip/
+patches/* usr/lib/pd/doc/pidip/

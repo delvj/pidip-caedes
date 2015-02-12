@@ -1,0 +1,93 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01-configure-pdp.dpatch by Claude Heiland-Allen <claudiusmaximus@goto10.org>
+## 02-color-spaces.dpatch by Pablo Martin <caedes@sindominio.net>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: let configure find pdp and pd
+
+@DPATCH@
+
+diff -ru orig/pidip.orig/modules/pdp_imgloader.c pidip/modules/pdp_imgloader.c
+--- orig/pidip.orig/modules/pdp_imgloader.c	2010-12-06 06:32:41.000000000 +0100
++++ pidip/modules/pdp_imgloader.c	2015-02-11 17:13:22.063298976 +0100
+@@ -594,9 +594,10 @@
+ 	newframe = imlib_create_image(x->x_vwidth, x->x_vheight);
+ 	imlib_context_set_image(newframe);
+ 	DATA32 *imdata = imlib_image_get_data();
+-        yuv_Y122RGB( data, imdata, x->x_vwidth, x->x_vheight );
++        yuv_Y122BGR( data, imdata, x->x_vwidth, x->x_vheight );
+ 	draw_rgb_image(x);
+-        yuv_RGB2Y12( imdata, newdata, x->x_vwidth, x->x_vheight );
++        //yuv_RGB2Y12( imdata, newdata, x->x_vwidth, x->x_vheight );
++        pdp_llconv(imdata, RIF_BGRA_P____U8, newdata, RIF_YVU__P411_S16, x->x_vwidth, x->x_vheight);
+ 	imlib_image_put_back_data(imdata);
+ 	imlib_free_image();
+     }
+diff -ru orig/pidip.orig/modules/pdp_qtext.c pidip/modules/pdp_qtext.c
+--- orig/pidip.orig/modules/pdp_qtext.c	2010-12-06 06:32:38.000000000 +0100
++++ pidip/modules/pdp_qtext.c	2015-02-11 17:12:34.271298203 +0100
+@@ -937,7 +937,8 @@
+     pdp_qtext_draw_all_texts(x);
+     
+     // copy Imlib image to outgoing packet
+-    yuv_RGB2Y12( imdata, newdata, x->x_vwidth, x->x_vheight );
++    // yuv_RGB2Y12( imdata, newdata, x->x_vwidth, x->x_vheight );
++    pdp_llconv(imdata, RIF_RGBA_P____U8, newdata, RIF_YVU__P411_S16, x->x_vwidth, x->x_vheight);
+ 
+     return;
+ }
+diff -ru orig/pidip.orig/system/yuv.c pidip/system/yuv.c
+--- orig/pidip.orig/system/yuv.c	2010-12-06 06:32:03.000000000 +0100
++++ pidip/system/yuv.c	2015-02-11 17:14:24.883299992 +0100
+@@ -133,6 +133,13 @@
+     return ( (yuv_YUVtoR(y,u,v)<<16) + (yuv_YUVtoG(y,u,v)<<8) + (yuv_YUVtoB(y,u,v)) ); 
+ }
+ 
++int yuv_YUVtoBGR(unsigned char y, unsigned char u, unsigned char v)
++{
++    if ( yuvinit == -1 ) { yuv_init(); }
++    return ( (yuv_YUVtoB(y,u,v)<<16) + (yuv_YUVtoG(y,u,v)<<8) + (yuv_YUVtoR(y,u,v)) ); 
++}
++
++
+ void yuv_Y122RGB( short int* packet, unsigned int *rgb, int width, int height )
+ {
+   unsigned char y=0,u=0,v=0;
+@@ -163,6 +170,37 @@
+ 
+ }
+ 
++void yuv_Y122BGR( short int* packet, unsigned int *rgb, int width, int height )
++{
++  unsigned char y=0,u=0,v=0;
++  int X,Y;
++  int uoffset = width*height;
++  int maxoffset = width*height+((width*height)>>1);
++  int voffset = width*height+((width*height)>>2);
++
++  if ( !packet || !rgb ) 
++  {
++     post( "yuv_Y122RGB : pointers are NULL !!!" );
++     return;
++  }
++  if ( yuvinit == -1 ) { yuv_init(); }
++  for(Y=0; Y < height; Y++){
++     for(X=0; X < width; X++){
++        // post( "yuv_Y122RGB : X=%d Y=%d", X, Y );
++        if ( (Y*width+X) < maxoffset ) 
++            y=(packet[Y*width+X]>>7);
++        if( (uoffset+((Y>>1)*(width>>1)+(X>>1))) < maxoffset )
++            u=(packet[uoffset+((Y>>1)*(width>>1)+(X>>1))]>>8)+128;
++        if( (voffset+((Y>>1)*(width>>1)+(X>>1))) < maxoffset )
++            v=(packet[voffset+((Y>>1)*(width>>1)+(X>>1))]>>8)+128;
++
++        rgb[Y*width+X] = yuv_YUVtoBGR( y, u, v );
++     }
++  }
++
++}
++
++
+ void yuv_RGB2Y12( unsigned int *rgb, short int* packet, int width, int height )
+ {
+   short int y,u,v,iu=0,iv=0;

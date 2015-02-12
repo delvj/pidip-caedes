@@ -1,0 +1,50 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01-configure-pdp.dpatch by Claude Heiland-Allen <claudiusmaximus@goto10.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: let configure find pdp and pd
+
+@DPATCH@
+
+diff -ru orig/pidip.orig/configure.ac pidip/configure.ac
+--- orig/pidip.orig/configure.ac	2012-02-14 03:43:53.000000000 +0100
++++ pidip/configure.ac	2015-02-11 18:06:03.739350111 +0100
+@@ -6,9 +6,9 @@
+ AC_CONFIG_HEADER(include/pidip_config.h)
+ 
+ PDP_PIDIP_VERSION="0.12.30"
+-PD_DIR=/usr/local/pd
++PD_DIR="`pwd`/debian/bundled/"
+ ARTKP_DIR=/usr/src/ARToolKitPlus
+-PDP_DIR=/usr/local/pd/pdp
++PDP_DIR="/usr/include/pdp/"
+ PDP_CAPTURE_OBJECT=
+ PDP_DC1394_OBJECT=
+ PDP_FREENECT_OBJECT=
+@@ -86,7 +86,7 @@
+ fi
+ 
+ PDP_PIDIP_LIBS="$PDP_PIDIP_LIBS -lbz2 -lz -ldl -lmp3lame -logg -lvorbis -lvorbisenc"
+-PDP_PIDIP_INCLUDES="-I$PD_DIR/src -I. -I$PDP_DIR/include -I../include -I../charmaps"
++PDP_PIDIP_INCLUDES="-I$PD_DIR/src -I. -I$PDP_DIR -I../include -I../charmaps"
+ 
+ make clean
+ 
+@@ -199,7 +199,7 @@
+ fi
+ 
+ echo -n "looking for pd sources (required) ... "
+-if test -f $PD_DIR/src/m_pd.h
++if test -d $PD_DIR/src/
+ then
+   AC_SUBST(PD_DIR)
+   echo "ok." 
+@@ -209,7 +209,7 @@
+ fi
+ 
+ echo -n "looking for pdp sources (required) ... "
+-if test -f $PDP_DIR/CHANGES.LOG
++if test -d $PDP_DIR/
+ then
+   AC_SUBST(PDP_DIR)
+   echo "ok." 
