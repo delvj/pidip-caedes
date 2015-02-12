@@ -1,13 +1,15 @@
-Source: pidip-caedes
+Source: pd-pidip
 Section: graphics
 Priority: extra
-Maintainer: Pablo Martin <caedes@sindominio.net>
-Build-Depends: pd-pdp-caedes, puredata, debhelper (>> 6.0.0), libimlib2-dev, libaa1-dev, libmagickcore-dev, libquicktime-dev, libgsl0-dev, libtheora-dev, libvorbis-dev, libdv4-dev, linux-libc-dev
-Standards-Version: 3.8.3
+Maintainer: Claude Heiland-Allen <claudiusmaximus@goto10.org>
+Build-Depends: debhelper (>= 6), dpatch, patchutils, autotools-dev, automake, autoconf, pd-pdp-dev | pd-pdp-caedes, pd, libimlib2-dev, libtheora-dev, libvorbis-dev, graphicsmagick-libmagick-dev-compat | libmagick-dev, libmp3lame-dev, libquicktime-dev, libgsl0-dev, libdc1394-22-dev, libavformat-dev, libdv4-dev
+Standards-Version: 3.8.0
 
-Package: pd-pidip-caedes
+Package: pd-pidip
 Architecture: any
-Depends: pd-pdp-caedes (>> 0.12.5), ${shlibs:Depends}, ${misc:Depends}
-Description: Additional video objects for pdp
- Additional video objects for Pure Data Packet
- some of them are adapted from EffecTV.
+Depends: ${shlibs:Depends}, ${misc:Depends}, pd-pdp | pd-pdp-caedes, pd, libc6, tcllib
+Enhances: pd-pdp, pd
+Description: additional video objects for PDP for puredata
+ PIDIP is a Pd external library containing additional video objects for 
+ PDP.  PDP is a Pd external library for processing data packets, 
+ including images and video.

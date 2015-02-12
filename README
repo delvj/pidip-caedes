@@ -1,30 +1,12 @@
-*****************************************************************************
-copyleft 2002 by Yves Degoyon ( ydegoyon@free.fr )
+Packaging for PIDIP. PIDIP is written by Yves Degoyon.
 
-This version is modified adding another text and image compositor and other tweaks... check the original at http://ydegoyon.free.fr/pidip.html
+You can find the original software at: http://ydegoyon.free.fr/pidip.html
 
-contributors :
+Patches in debian/patches including build patch and some small fixes.
 
-Lluis Gomez i Bigorda ( http://www.artefacte.org/pd )
-Tatiana de la O.
+This packaging also makes the build compatible with pdp-caedes version of PDP (by Tom Schouten).
 
-tarballs and updates available @ http://ydegoyon.free.fr
+The package itself is based off the one from https://launchpad.net/~puredyne-team/+archive/ppa
+Our repo is at: https://launchpad.net/~delvj/+archive/ubuntu/ppa
 
-pidip : additional video objects for Pure Data Packet
-some of them are adapted from EffecTV
-(http://effectv.sourceforge.net/)
-or other source mentionned
-
-To install pidip, follow the steps from INSTALL
-
-This software is published under GPL terms.
-
-This is software with ABSOLUTELY NO WARRANTY.
-Use it at your OWN RISK. It's possible to damage e.g. hardware or your hearing
-due to a bug or for other reasons. 
-We do not warrant that the program is free of infringement of any third-party
-patents.
-
-*****************************************************************************
-
-
+ - caedes

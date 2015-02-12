@@ -1,10 +1,54 @@
-This package was debianized by Pablo Martín <caedes@sindominio.net> on
-Fri, 18 Jul 2003 05:42:47 +0200.
+This package was debianized by Claude Heiland-Allen <claudiusmaximus@goto10.org> on
+Thu, 01 May 2008 19:26:06 +0100.
 
-It was downloaded from http://ydegoyon.free.fr
+It was downloaded from https://pure-data.svn.sourceforge.net/svnroot/pure-data/trunk/externals/pidip
 
-Upstream Author: Yves Degoyon <ydegoyon@free.fr>
+Upstream Authors: 
 
-Copyright:
+    Yves Degoyon <ydegoyon@free.fr>
+    Lluis Gomez i Bigorda
+    Tatiana de la O.
 
-This software is published under GPL terms, found on Debian systems in the file /usr/share/common-licenses/GPL-2.
+Copyright: 
+
+    Copyright (C) 2008 Yves Degoyon
+
+License:
+
+    NOT FOR MILITARY OR REPRESSIVE USE !!!
+
+    This software is copyrighted by Yves Degoyon and others.  The following
+    terms (the "Standard Improved BSD License") apply to all files associated with
+    the software unless explicitly disclaimed in individual files:
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:
+
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above  
+       copyright notice, this list of conditions and the following 
+       disclaimer in the documentation and/or other materials provided
+       with the distribution.
+    3. The name of the author may not be used to endorse or promote
+       products derived from this software without specific prior 
+       written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+    EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+    PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR
+    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,   
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+    LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+    IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+    THE POSSIBILITY OF SUCH DAMAGE.
+
+
+The Debian packaging is (C) 2008, Claude Heiland-Allen <claudiusmaximus@goto10.org> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+
